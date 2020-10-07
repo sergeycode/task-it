@@ -11,7 +11,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo } from '../store/actions';
 
-const TodoItem = ({ title, completed, style }) => (
+const TodoItem = ({ title, style }) => (
     <TouchableOpacity>
         <Text style={style}>{title}</Text>
     </TouchableOpacity>
