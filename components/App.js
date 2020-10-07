@@ -11,7 +11,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodo } from '../store/actions';
 
-const TodoItem = ({ title, style }) => (
+const TodoItem = ({ title, completed, style }) => (
     <TouchableOpacity>
         <Text style={style}>{title}</Text>
     </TouchableOpacity>
@@ -27,7 +27,9 @@ export default function App() {
     const renderTodoItem = ({ item }) => (
         <TodoItem
             title={item.title}
-            // style={{ textDecorationLine: 'line-through' }}
+            style={{
+                textDecorationLine: item.completed ? 'line-through' : 'none',
+            }}
         />
     );
 
