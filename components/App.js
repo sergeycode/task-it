@@ -9,10 +9,10 @@ import {
     FlatList,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo } from '../store/actions';
+import { addTodo, toggleTodo } from '../store/actions';
 
-const TodoItem = ({ title, style }) => (
-    <TouchableOpacity>
+const TodoItem = ({ title, style, onPress }) => (
+    <TouchableOpacity onPress={onPress}>
         <Text style={style}>{title}</Text>
     </TouchableOpacity>
 );
@@ -24,19 +24,24 @@ export default function App() {
 
     const todos = useSelector(state => state.todos.todos);
 
+    const addTodoHandler = () => {
+        dispatch(addTodo(inputText));
+        setInputText('');
+    };
+
+    const handleCompleted = id => {
+        dispatch(toggleTodo(id));
+    };
+
     const renderTodoItem = ({ item }) => (
         <TodoItem
             title={item.title}
             style={{
                 textDecorationLine: item.completed ? 'line-through' : 'none',
             }}
+            onPress={() => handleCompleted(item.id)}
         />
     );
-
-    const addTodoHandler = () => {
-        dispatch(addTodo(inputText));
-        setInputText('');
-    };
 
     return (
         <View style={styles.container}>
@@ -68,7 +73,6 @@ const styles = StyleSheet.create({
     inputContainer: {
         flex: 1,
         flexDirection: 'row',
-        height: 110,
     },
     textInput: {
         width: 200,

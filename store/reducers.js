@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import { ADD_TODO } from './actions';
+import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO } from './actions';
 
 const initialState = {
     todos: [
@@ -32,6 +32,19 @@ export const todosReducer = (state = initialState, action) => {
                     title: action.title,
                     completed: false,
                 }),
+            };
+        case TOGGLE_TODO:
+            return {
+                todos: state.todos.map(todo =>
+                    todo.id === action.id
+                        ? { ...todo, completed: !todo.completed }
+                        : todo
+                ),
+            };
+        case REMOVE_TODO:
+            return {
+                ...state,
+                todos: state.todos.filter(todo => todo !== action.id),
             };
 
         default:
