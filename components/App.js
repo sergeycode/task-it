@@ -9,12 +9,15 @@ import {
     FlatList,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { addTodo, toggleTodo } from '../store/actions';
+import { addTodo, removeTodo, toggleTodo } from '../store/actions';
 
-const TodoItem = ({ title, style, onPress }) => (
-    <TouchableOpacity onPress={onPress}>
-        <Text style={style}>{title}</Text>
-    </TouchableOpacity>
+const TodoItem = ({ title, style, onPress, onRemove }) => (
+    <View>
+        <TouchableOpacity onPress={onPress}>
+            <Text style={style}>{title}</Text>
+        </TouchableOpacity>
+        <Button title="Remove" onPress={onRemove} />
+    </View>
 );
 
 export default function App() {
@@ -32,6 +35,9 @@ export default function App() {
     const handleCompleted = id => {
         dispatch(toggleTodo(id));
     };
+    const handleRemove = id => {
+        dispatch(removeTodo(id));
+    };
 
     const renderTodoItem = ({ item }) => (
         <TodoItem
@@ -40,6 +46,7 @@ export default function App() {
                 textDecorationLine: item.completed ? 'line-through' : 'none',
             }}
             onPress={() => handleCompleted(item.id)}
+            onRemove={() => handleRemove(item.id)}
         />
     );
 

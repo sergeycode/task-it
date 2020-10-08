@@ -35,6 +35,7 @@ export const todosReducer = (state = initialState, action) => {
             };
         case TOGGLE_TODO:
             return {
+                ...state,
                 todos: state.todos.map(todo =>
                     todo.id === action.id
                         ? { ...todo, completed: !todo.completed }
@@ -44,7 +45,7 @@ export const todosReducer = (state = initialState, action) => {
         case REMOVE_TODO:
             return {
                 ...state,
-                todos: state.todos.filter(todo => todo !== action.id),
+                todos: state.todos.filter(todo => todo.id !== action.id),
             };
 
         default:
