@@ -12,8 +12,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addTodo, removeTodo, toggleTodo } from '../store/actions';
 
 const TodoItem = ({ title, style, onPress, onRemove }) => (
-    <View>
-        <TouchableOpacity onPress={onPress}>
+    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
+        <TouchableOpacity onPress={onPress} style={{ flexGrow: 1 }}>
             <Text style={style}>{title}</Text>
         </TouchableOpacity>
         <Button title="Remove" onPress={onRemove} />
@@ -27,7 +27,7 @@ export default function App() {
 
     const todos = useSelector(state => state.todos.todos);
 
-    const addTodoHandler = () => {
+    const handleAddTodo = () => {
         dispatch(addTodo(inputText));
         setInputText('');
     };
@@ -44,6 +44,10 @@ export default function App() {
             title={item.title}
             style={{
                 textDecorationLine: item.completed ? 'line-through' : 'none',
+                borderWidth: 1,
+                borderColor: '#ccc',
+                paddingHorizontal: 3,
+                paddingVertical: 8,
             }}
             onPress={() => handleCompleted(item.id)}
             onRemove={() => handleRemove(item.id)}
@@ -60,7 +64,7 @@ export default function App() {
                         onChangeText={text => setInputText(text)}
                         value={inputText}
                     />
-                    <Button title="Add" onPress={addTodoHandler} />
+                    <Button title="Add" onPress={handleAddTodo} />
                 </View>
                 <Text>Tasks List:</Text>
                 <FlatList data={todos} renderItem={renderTodoItem} />
@@ -84,9 +88,9 @@ const styles = StyleSheet.create({
     textInput: {
         width: 200,
         height: 30,
-        marginTop: 5,
         borderColor: 'grey',
         borderWidth: 1,
-        borderRadius: 10,
+        paddingVertical: 15,
+        paddingHorizontal: 10,
     },
 });
