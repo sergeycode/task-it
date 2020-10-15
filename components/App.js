@@ -36,8 +36,10 @@ export default function App() {
     );
 
     const handleAddTodo = () => {
-        dispatch(addTodo(inputText));
-        setInputText('');
+        if (inputText.trim() != '') {
+            dispatch(addTodo(inputText.trim()));
+            setInputText('');
+        }
     };
 
     const handleCompleted = id => dispatch(toggleTodo(id));
@@ -70,6 +72,7 @@ export default function App() {
                         style={styles.textInput}
                         onChangeText={text => setInputText(text)}
                         value={inputText}
+                        onSubmitEditing={handleAddTodo}
                     />
                     <Button title="Add" onPress={handleAddTodo} />
                 </View>
@@ -111,8 +114,8 @@ const styles = StyleSheet.create({
         height: 30,
         borderColor: 'grey',
         borderWidth: 1,
-        paddingVertical: 15,
-        paddingHorizontal: 10,
+        paddingVertical: 2,
+        paddingHorizontal: 5,
     },
     filterContainer: {
         flex: 1,
