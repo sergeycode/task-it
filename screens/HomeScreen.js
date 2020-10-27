@@ -9,12 +9,7 @@ import {
     FlatList,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-    addTodo,
-    removeTodo,
-    toggleTodo,
-    onFilterSelect,
-} from '../store/actions';
+import { removeTodo, toggleTodo, onFilterSelect } from '../store/actions';
 import { FILTERS, filterVisible } from '../store/selectors';
 
 const TodoItem = ({ title, style, onPress, onRemove }) => (
@@ -26,21 +21,12 @@ const TodoItem = ({ title, style, onPress, onRemove }) => (
     </View>
 );
 
-export default function App() {
-    const [inputText, setInputText] = useState('');
-
+export default function HomeScreen() {
     const dispatch = useDispatch();
 
     const visibleTodos = useSelector(state =>
         filterVisible(state.todos.todos, state.filter.filter)
     );
-
-    const handleAddTodo = () => {
-        if (inputText.trim() != '') {
-            dispatch(addTodo(inputText.trim()));
-            setInputText('');
-        }
-    };
 
     const handleCompleted = id => dispatch(toggleTodo(id));
     const handleRemove = id => dispatch(removeTodo(id));
@@ -66,16 +52,6 @@ export default function App() {
     return (
         <View style={styles.container}>
             <View>
-                <Text>Add Task:</Text>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.textInput}
-                        onChangeText={text => setInputText(text)}
-                        value={inputText}
-                        onSubmitEditing={handleAddTodo}
-                    />
-                    <Button title="Add" onPress={handleAddTodo} />
-                </View>
                 <Text>Tasks List:</Text>
                 <FlatList data={visibleTodos} renderItem={renderTodoItem} />
                 <View style={styles.filterContainer}>
@@ -103,19 +79,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 50,
-    },
-    inputContainer: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    textInput: {
-        width: 200,
-        height: 30,
-        borderColor: 'grey',
-        borderWidth: 1,
-        paddingVertical: 2,
-        paddingHorizontal: 5,
     },
     filterContainer: {
         flex: 1,
