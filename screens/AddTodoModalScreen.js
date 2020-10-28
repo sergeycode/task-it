@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import AddTodo from '../components/AddTodo';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../store/actions';
+import { onFilterSelect } from '../store/actions';
+import { FILTERS } from '../store/selectors';
 
 const AddTodoModalScreen = ({ navigation }) => {
     const [inputText, setInputText] = useState('');
@@ -13,6 +15,7 @@ const AddTodoModalScreen = ({ navigation }) => {
         if (inputText.trim() != '') {
             dispatch(addTodo(inputText.trim()));
             setInputText('');
+            dispatch(onFilterSelect(FILTERS.ALL));
             navigation.goBack();
         }
     };
