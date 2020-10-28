@@ -52,7 +52,6 @@ export default function HomeScreen() {
     return (
         <View style={styles.container}>
             <View>
-                <Text>Tasks List:</Text>
                 <FlatList data={visibleTodos} renderItem={renderTodoItem} />
                 <View style={styles.filterContainer}>
                     <Button
