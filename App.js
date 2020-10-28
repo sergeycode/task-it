@@ -5,16 +5,8 @@ import { Provider } from 'react-redux';
 
 import { todosReducer, filterReducer } from './store/reducers';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-import AddTodoModalScreen from './screens/AddTodoModalScreen';
-
-import { FILTERS } from './store/selectors';
-
-import MainNavigation from './navigation/MainNavigation';
+import AppNavigation from './navigation/AppNavigation';
 
 const rootReducer = combineReducers({
     todos: todosReducer,
@@ -22,21 +14,10 @@ const rootReducer = combineReducers({
 });
 const store = createStore(rootReducer, composeWithDevTools());
 
-const RootStack = createStackNavigator();
-
 export default function () {
     return (
         <Provider store={store}>
-            <NavigationContainer>
-                <RootStack.Navigator mode="modal" headerMode="none">
-                    <RootStack.Screen name="Tabs" component={MainNavigation} />
-                    <RootStack.Screen
-                        name="AddTodoModal"
-                        component={AddTodoModalScreen}
-                        options={{ animationEnabled: true }}
-                    />
-                </RootStack.Navigator>
-            </NavigationContainer>
+            <AppNavigation />
         </Provider>
     );
 }

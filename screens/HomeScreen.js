@@ -3,14 +3,13 @@ import {
     StyleSheet,
     Text,
     View,
-    TextInput,
     Button,
     TouchableOpacity,
     FlatList,
 } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeTodo, toggleTodo, onFilterSelect } from '../store/actions';
-import { FILTERS, filterVisible } from '../store/selectors';
+import { removeTodo, toggleTodo } from '../store/actions';
+import { filterVisible } from '../store/selectors';
 
 const TodoItem = ({ title, style, onPress, onRemove }) => (
     <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
@@ -31,9 +30,6 @@ export default function HomeScreen() {
     const handleCompleted = id => dispatch(toggleTodo(id));
     const handleRemove = id => dispatch(removeTodo(id));
 
-    const filterSelect = selectedFilter =>
-        dispatch(onFilterSelect(selectedFilter));
-
     const renderTodoItem = ({ item }) => (
         <TodoItem
             title={item.title}
@@ -53,20 +49,6 @@ export default function HomeScreen() {
         <View style={styles.container}>
             <View>
                 <FlatList data={visibleTodos} renderItem={renderTodoItem} />
-                <View style={styles.filterContainer}>
-                    <Button
-                        title="All"
-                        onPress={() => filterSelect(FILTERS.ALL)}
-                    />
-                    <Button
-                        title="Active"
-                        onPress={() => filterSelect(FILTERS.ACTIVE)}
-                    />
-                    <Button
-                        title="Completed"
-                        onPress={() => filterSelect(FILTERS.COMPLETED)}
-                    />
-                </View>
             </View>
         </View>
     );
@@ -78,9 +60,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    filterContainer: {
-        flex: 1,
-        flexDirection: 'row',
     },
 });

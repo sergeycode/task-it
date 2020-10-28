@@ -1,10 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeScreen from '../screens/HomeScreen';
 import AddTodoModalScreen from '../screens/AddTodoModalScreen';
+
+import { onFilterSelect } from '../store/actions';
+import { FILTERS } from '../store/selectors';
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,7 +26,10 @@ const MainStackScreen = () => {
     );
 };
 
-const TabNavigation = () => {
+const MainNavigation = () => {
+    const dispatch = useDispatch();
+    const filterSelect = selectedFilter =>
+        dispatch(onFilterSelect(selectedFilter));
     return (
         <Tab.Navigator>
             {/* <Tab.Screen
@@ -42,6 +48,16 @@ const TabNavigation = () => {
                 })}
             />
             <Tab.Screen
+                name="Active"
+                component={MainStackScreen}
+                listeners={() => ({
+                    tabPress: e => {
+                        e.preventDefault();
+                        filterSelect(FILTERS.ACTIVE);
+                    },
+                })}
+            />
+            <Tab.Screen
                 name="TodoModal"
                 component={AddTodoModalScreen}
                 listeners={({ navigation }) => ({
@@ -54,8 +70,18 @@ const TabNavigation = () => {
                     title: 'Add',
                 }}
             />
+            <Tab.Screen
+                name="Completed"
+                component={MainStackScreen}
+                listeners={() => ({
+                    tabPress: e => {
+                        e.preventDefault();
+                        filterSelect(FILTERS.COMPLETED);
+                    },
+                })}
+            />
         </Tab.Navigator>
     );
 };
 
-export default TabNavigation;
+export default MainNavigation;
