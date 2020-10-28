@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -12,11 +12,20 @@ import { removeTodo, toggleTodo } from '../store/actions';
 import { filterVisible } from '../store/selectors';
 
 const TodoItem = ({ title, style, onPress, onRemove }) => (
-    <View style={{ flex: 1, flexDirection: 'row', marginBottom: 5 }}>
-        <TouchableOpacity onPress={onPress} style={{ flexGrow: 1 }}>
+    <View
+        style={{
+            flex: 1,
+            flexDirection: 'row',
+            marginBottom: 5,
+        }}
+    >
+        <TouchableOpacity
+            onPress={onPress}
+            style={{ flexGrow: 1, width: '90%' }}
+        >
             <Text style={style}>{title}</Text>
         </TouchableOpacity>
-        <Button title="Remove" onPress={onRemove} />
+        <Button title="x" onPress={onRemove} />
     </View>
 );
 
@@ -47,9 +56,7 @@ export default function HomeScreen() {
 
     return (
         <View style={styles.container}>
-            <View>
-                <FlatList data={visibleTodos} renderItem={renderTodoItem} />
-            </View>
+            <FlatList data={visibleTodos} renderItem={renderTodoItem} />
         </View>
     );
 }
