@@ -1,33 +1,11 @@
 import React from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    TouchableOpacity,
-    FlatList,
-} from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeTodo, toggleTodo } from '../store/actions';
 import { filterVisible } from '../store/selectors';
 
-const TodoItem = ({ title, style, onPress, onRemove }) => (
-    <View
-        style={{
-            flex: 1,
-            flexDirection: 'row',
-            marginBottom: 5,
-        }}
-    >
-        <TouchableOpacity
-            onPress={onPress}
-            style={{ flexGrow: 1, width: '90%' }}
-        >
-            <Text style={style}>{title}</Text>
-        </TouchableOpacity>
-        <Button title="x" onPress={onRemove} />
-    </View>
-);
+import TodoItem from '../components/TodoItem';
+import Colors from '../constants/Colors';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
@@ -42,12 +20,13 @@ export default function HomeScreen() {
     const renderTodoItem = ({ item }) => (
         <TodoItem
             title={item.title}
-            style={{
-                textDecorationLine: item.completed ? 'line-through' : 'none',
-                borderWidth: 1,
-                borderColor: '#ccc',
-                paddingHorizontal: 3,
-                paddingVertical: 8,
+            dotStyle={{
+                color: item.completed
+                    ? Colors.primaryLightest
+                    : Colors.secondary,
+            }}
+            textStyle={{
+                color: item.completed ? Colors.primaryLightest : Colors.white,
             }}
             onPress={() => handleCompleted(item.id)}
             onRemove={() => handleRemove(item.id)}
@@ -64,7 +43,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: Colors.primary,
         alignItems: 'center',
         justifyContent: 'center',
     },

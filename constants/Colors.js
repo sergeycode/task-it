@@ -5,4 +5,5 @@ export default {
     primaryLighter: '#2F3844',
     primaryLightest: '#627083',
     secondary: '#E6D140',
+    white: '#fff',
 };

@@ -9,6 +9,9 @@ import AddTodoModalScreen from '../screens/AddTodoModalScreen';
 import { onFilterSelect } from '../store/actions';
 import { FILTERS } from '../store/selectors';
 
+import Colors from '../constants/Colors';
+// import { LinearGradient } from 'expo-linear-gradient';
+
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -20,6 +23,14 @@ const MainStackScreen = () => {
                 component={HomeScreen}
                 options={{
                     title: 'Todo List',
+                    headerStyle: {
+                        backgroundColor: Colors.primary,
+                        shadowOffset: { width: 0, height: 0 },
+                        shadowColor: Colors.primaryDark,
+                        shadowOpacity: 0.8,
+                        shadowRadius: 2,
+                    },
+                    headerTintColor: '#fff',
                 }}
             />
         </MainStack.Navigator>
@@ -58,6 +69,16 @@ const MainNavigation = () => {
                 })}
             />
             <Tab.Screen
+                name="Completed"
+                component={MainStackScreen}
+                listeners={() => ({
+                    tabPress: e => {
+                        e.preventDefault();
+                        filterSelect(FILTERS.COMPLETED);
+                    },
+                })}
+            />
+            <Tab.Screen
                 name="TodoModal"
                 component={AddTodoModalScreen}
                 listeners={({ navigation }) => ({
@@ -69,16 +90,6 @@ const MainNavigation = () => {
                 options={{
                     title: 'Add',
                 }}
-            />
-            <Tab.Screen
-                name="Completed"
-                component={MainStackScreen}
-                listeners={() => ({
-                    tabPress: e => {
-                        e.preventDefault();
-                        filterSelect(FILTERS.COMPLETED);
-                    },
-                })}
             />
         </Tab.Navigator>
     );
