@@ -10,6 +10,7 @@ import { onFilterSelect } from '../store/actions';
 import { FILTERS } from '../store/selectors';
 
 import Colors from '../constants/Colors';
+import { Feather } from '@expo/vector-icons';
 // import { LinearGradient } from 'expo-linear-gradient';
 
 const MainStack = createStackNavigator();
@@ -42,7 +43,14 @@ const MainNavigation = () => {
     const filterSelect = selectedFilter =>
         dispatch(onFilterSelect(selectedFilter));
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            tabBarOptions={{
+                style: {
+                    backgroundColor: Colors.primary,
+                },
+                showLabel: false,
+            }}
+        >
             {/* <Tab.Screen
                 name="Main"
                 component={MainStackScreen}
@@ -57,6 +65,11 @@ const MainNavigation = () => {
                         filterSelect(FILTERS.ALL);
                     },
                 })}
+                options={{
+                    tabBarIcon: () => (
+                        <Feather name="list" size={28} color={Colors.white} />
+                    ),
+                }}
             />
             <Tab.Screen
                 name="Active"
@@ -67,6 +80,11 @@ const MainNavigation = () => {
                         filterSelect(FILTERS.ACTIVE);
                     },
                 })}
+                options={{
+                    tabBarIcon: () => (
+                        <Feather name="circle" size={24} color={Colors.white} />
+                    ),
+                }}
             />
             <Tab.Screen
                 name="Completed"
@@ -77,6 +95,15 @@ const MainNavigation = () => {
                         filterSelect(FILTERS.COMPLETED);
                     },
                 })}
+                options={{
+                    tabBarIcon: () => (
+                        <Feather
+                            name="check-circle"
+                            size={24}
+                            color={Colors.white}
+                        />
+                    ),
+                }}
             />
             <Tab.Screen
                 name="TodoModal"
@@ -89,6 +116,13 @@ const MainNavigation = () => {
                 })}
                 options={{
                     title: 'Add',
+                    tabBarIcon: () => (
+                        <Feather
+                            name="plus-circle"
+                            size={24}
+                            color={Colors.white}
+                        />
+                    ),
                 }}
             />
         </Tab.Navigator>
