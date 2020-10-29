@@ -21,12 +21,10 @@ export default function HomeScreen() {
         <TodoItem
             title={item.title}
             dotStyle={{
-                color: item.completed
-                    ? Colors.primaryLightest
-                    : Colors.secondary,
+                color: item.completed ? Colors.primaryFade : Colors.secondary,
             }}
             textStyle={{
-                color: item.completed ? Colors.primaryLightest : Colors.white,
+                color: item.completed ? Colors.primaryFade : Colors.white,
             }}
             onPress={() => handleCompleted(item.id)}
             onRemove={() => handleRemove(item.id)}

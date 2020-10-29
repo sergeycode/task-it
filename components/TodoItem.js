@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     lineTop: {
         borderLeftWidth: 2,
         height: 28,
-        borderLeftColor: Colors.primaryLightest,
+        borderLeftColor: Colors.primaryFade,
         position: 'absolute',
         top: -20,
         left: 11,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     lineBottom: {
         borderLeftWidth: 2,
         height: 28,
-        borderLeftColor: Colors.primaryLightest,
+        borderLeftColor: Colors.primaryFade,
         position: 'absolute',
         left: 11,
         bottom: -20,
