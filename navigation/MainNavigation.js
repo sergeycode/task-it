@@ -45,6 +45,9 @@ const MainNavigation = () => {
 
     const filter = useSelector(state => state.filter.filter);
 
+    const activeColor = activeFilter =>
+        filter === activeFilter ? Colors.secondary : Colors.white;
+
     return (
         <Tab.Navigator
             tabBarOptions={{
@@ -73,11 +76,7 @@ const MainNavigation = () => {
                         <Feather
                             name="list"
                             size={28}
-                            color={
-                                filter === FILTERS.ALL
-                                    ? Colors.secondary
-                                    : Colors.white
-                            }
+                            color={activeColor(FILTERS.ALL)}
                         />
                     ),
                 }}
@@ -96,11 +95,7 @@ const MainNavigation = () => {
                         <Feather
                             name="circle"
                             size={24}
-                            color={
-                                filter === FILTERS.ACTIVE
-                                    ? Colors.secondary
-                                    : Colors.white
-                            }
+                            color={activeColor(FILTERS.ACTIVE)}
                         />
                     ),
                 }}
@@ -119,11 +114,7 @@ const MainNavigation = () => {
                         <Feather
                             name="check-circle"
                             size={24}
-                            color={
-                                filter === FILTERS.COMPLETED
-                                    ? Colors.secondary
-                                    : Colors.white
-                            }
+                            color={activeColor(FILTERS.COMPLETED)}
                         />
                     ),
                 }}
