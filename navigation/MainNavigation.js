@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -42,6 +42,9 @@ const MainNavigation = () => {
     const dispatch = useDispatch();
     const filterSelect = selectedFilter =>
         dispatch(onFilterSelect(selectedFilter));
+
+    const filter = useSelector(state => state.filter.filter);
+
     return (
         <Tab.Navigator
             tabBarOptions={{
@@ -67,7 +70,15 @@ const MainNavigation = () => {
                 })}
                 options={{
                     tabBarIcon: () => (
-                        <Feather name="list" size={28} color={Colors.white} />
+                        <Feather
+                            name="list"
+                            size={28}
+                            color={
+                                filter === FILTERS.ALL
+                                    ? Colors.secondary
+                                    : Colors.white
+                            }
+                        />
                     ),
                 }}
             />
@@ -82,7 +93,15 @@ const MainNavigation = () => {
                 })}
                 options={{
                     tabBarIcon: () => (
-                        <Feather name="circle" size={24} color={Colors.white} />
+                        <Feather
+                            name="circle"
+                            size={24}
+                            color={
+                                filter === FILTERS.ACTIVE
+                                    ? Colors.secondary
+                                    : Colors.white
+                            }
+                        />
                     ),
                 }}
             />
@@ -100,7 +119,11 @@ const MainNavigation = () => {
                         <Feather
                             name="check-circle"
                             size={24}
-                            color={Colors.white}
+                            color={
+                                filter === FILTERS.COMPLETED
+                                    ? Colors.secondary
+                                    : Colors.white
+                            }
                         />
                     ),
                 }}
