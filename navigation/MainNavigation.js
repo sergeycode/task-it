@@ -11,6 +11,7 @@ import { FILTERS } from '../store/selectors';
 
 import Colors from '../constants/Colors';
 import { Feather } from '@expo/vector-icons';
+import { View, Text, StyleSheet } from 'react-native';
 // import { LinearGradient } from 'expo-linear-gradient';
 
 const MainStack = createStackNavigator();
@@ -23,7 +24,16 @@ const MainStackScreen = () => {
                 name="Home"
                 component={HomeScreen}
                 options={{
-                    title: 'Todo List',
+                    title: (
+                        <View style={styles.titleContainer}>
+                            <Feather
+                                name="check-circle"
+                                size={24}
+                                color={Colors.secondary}
+                            />
+                            <Text style={styles.titleText}>Task-it</Text>
+                        </View>
+                    ),
                     headerStyle: {
                         backgroundColor: Colors.primary,
                         shadowOffset: { width: 0, height: 0 },
@@ -53,15 +63,11 @@ const MainNavigation = () => {
             tabBarOptions={{
                 style: {
                     backgroundColor: Colors.primary,
+                    borderTopColor: Colors.primaryFade,
                 },
                 showLabel: false,
             }}
         >
-            {/* <Tab.Screen
-                name="Main"
-                component={MainStackScreen}
-                options={{ title: 'Home' }}
-            /> */}
             <Tab.Screen
                 name="All"
                 component={MainStackScreen}
@@ -144,3 +150,17 @@ const MainNavigation = () => {
 };
 
 export default MainNavigation;
+
+const styles = StyleSheet.create({
+    titleContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    titleText: {
+        fontSize: 18,
+        fontWeight: '500',
+        color: Colors.white,
+        marginLeft: 10,
+    },
+});
