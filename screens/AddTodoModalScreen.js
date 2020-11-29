@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
 import AddTodo from '../components/AddTodo';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../store/actions';
@@ -35,5 +34,3 @@ const AddTodoModalScreen = ({ navigation }) => {
 };
 
 export default AddTodoModalScreen;
-
-const styles = StyleSheet.create({});

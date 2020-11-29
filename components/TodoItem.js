@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: 5,
         paddingVertical: 20,
-        color: '#fff',
+        color: Colors.white,
         backgroundColor: Colors.primary,
         borderBottomWidth: 0.5,
         borderBottomColor: Colors.primaryDark,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     text: {
-        color: '#fff',
+        color: Colors.white,
         fontSize: 18,
         fontWeight: '500',
     },

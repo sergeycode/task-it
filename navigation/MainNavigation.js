@@ -41,7 +41,7 @@ const MainStackScreen = () => {
                         shadowOpacity: 0.8,
                         shadowRadius: 2,
                     },
-                    headerTintColor: '#fff',
+                    headerTintColor: Colors.white,
                 }}
             />
         </MainStack.Navigator>
