@@ -89,14 +89,13 @@ const styles = StyleSheet.create({
     textInput: {
         width: '60%',
         maxWidth: 500,
-        height: 30,
+        height: 45,
         marginTop: 20,
         borderWidth: 2,
-        borderRadius: 15,
-        paddingVertical: 2,
-        paddingHorizontal: 10,
+        borderRadius: 30,
+        paddingHorizontal: 20,
         color: Colors.white,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: '500',
     },
     buttonContainer: {
