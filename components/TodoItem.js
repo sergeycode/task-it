@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
 
-const TodoItem = ({ title, dotStyle, textStyle, onPress, onRemove }) => (
+const TodoItem = ({ title, dotStyle, textStyle, onPress }) => (
     <View style={styles.container}>
         <TouchableOpacity style={styles.item} onPress={onPress}>
             <View style={styles.itemContainer}>
@@ -18,7 +18,6 @@ const TodoItem = ({ title, dotStyle, textStyle, onPress, onRemove }) => (
                 <Text style={{ ...styles.text, ...textStyle }}>{title}</Text>
             </View>
         </TouchableOpacity>
-        {/* <Button title="x" onPress={onRemove} /> */}
     </View>
 );
 
