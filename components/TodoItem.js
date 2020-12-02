@@ -35,8 +35,6 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         color: Colors.white,
         backgroundColor: Colors.primary,
-        borderBottomWidth: 0.5,
-        borderBottomColor: Colors.primaryDark,
     },
     itemContainer: {
         flex: 1,

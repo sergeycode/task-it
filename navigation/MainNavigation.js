@@ -12,7 +12,6 @@ import { FILTERS } from '../store/selectors';
 import Colors from '../constants/Colors';
 import { Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet } from 'react-native';
-// import { LinearGradient } from 'expo-linear-gradient';
 
 const MainStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
