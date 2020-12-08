@@ -1,4 +1,4 @@
-import { insertTodo, fetchTodos, deleteTodo } from '../helpers/db';
+import { insertTodo, fetchTodos, deleteTodo, updateTodo } from '../helpers/db';
 
 export const ADD_TODO = 'ADD_TODO';
 export const SET_TODOS = 'SET_TODOS';
@@ -35,12 +35,25 @@ export const loadTodos = () => {
         }
     };
 };
-export const toggleTodo = id => ({ type: TOGGLE_TODO, id });
-// export const removeTodo = id => ({ type: REMOVE_TODO, id });
+// export const toggleTodo = id => ({ type: TOGGLE_TODO, id });
+export const toggleTodo = (id, completed) => {
+    return async dispatch => {
+        try {
+            await updateTodo(id, completed);
+            dispatch({
+                type: TOGGLE_TODO,
+                id,
+            });
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    };
+};
 export const removeTodo = id => {
     return async dispatch => {
         try {
-            const dbResult = await deleteTodo(id);
+            await deleteTodo(id);
             dispatch({
                 type: REMOVE_TODO,
                 id,

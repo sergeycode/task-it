@@ -21,7 +21,8 @@ export default function HomeScreen() {
         filterVisible(state.todos.todos, state.filter.filter)
     );
 
-    const handleCompleted = id => dispatch(toggleTodo(id));
+    const handleCompleted = (id, completed) =>
+        dispatch(toggleTodo(id, !completed));
     const handleRemove = id => dispatch(removeTodo(id));
 
     const renderTodoItem = ({ item }) => {
@@ -52,7 +53,7 @@ export default function HomeScreen() {
                                 ? Colors.primaryFade
                                 : Colors.white,
                         }}
-                        onPress={() => handleCompleted(item.id)}
+                        onPress={() => handleCompleted(item.id, item.completed)}
                     />
                 </Swipeable>
             </View>

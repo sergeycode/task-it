@@ -47,8 +47,28 @@ export const deleteTodo = id => {
         db.transaction(tx => {
             tx.executeSql(
                 `DELETE FROM todos
-                        WHERE id = ?`,
+                 WHERE id = ?`,
                 [id],
+                (_, result) => {
+                    resolve(result);
+                },
+                (_, err) => {
+                    reject(err);
+                }
+            );
+        });
+    });
+    return promise;
+};
+
+export const updateTodo = (id, completed) => {
+    const promise = new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                `UPDATE todos
+                 SET completed = ?
+                 WHERE id = ?`,
+                [completed, id],
                 (_, result) => {
                     resolve(result);
                 },
