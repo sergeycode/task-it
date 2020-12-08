@@ -12,7 +12,7 @@ const AddTodoModalScreen = ({ navigation }) => {
 
     const handleAddTodo = () => {
         if (inputText.trim() != '') {
-            dispatch(addTodo(inputText.trim()));
+            dispatch(addTodo(inputText.trim(), 0));
             setInputText('');
             dispatch(onFilterSelect(FILTERS.ALL));
             navigation.goBack();

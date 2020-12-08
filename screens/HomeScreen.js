@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeTodo, toggleTodo } from '../store/actions';
+import { removeTodo, toggleTodo, loadTodos } from '../store/actions';
 import { filterVisible } from '../store/selectors';
 
 import TodoItem from '../components/TodoItem';
@@ -12,6 +12,10 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 export default function HomeScreen() {
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadTodos());
+    }, [dispatch]);
 
     const visibleTodos = useSelector(state =>
         filterVisible(state.todos.todos, state.filter.filter)
@@ -62,7 +66,11 @@ export default function HomeScreen() {
                     There are no tasks in this category
                 </Text>
             ) : (
-                <FlatList data={visibleTodos} renderItem={renderTodoItem} />
+                <FlatList
+                    data={visibleTodos}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={renderTodoItem}
+                />
             )}
         </View>
     );

@@ -1,38 +1,31 @@
 import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
-import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, SELECT_FILTER } from './actions';
+import {
+    ADD_TODO,
+    SET_TODOS,
+    TOGGLE_TODO,
+    REMOVE_TODO,
+    SELECT_FILTER,
+} from './actions';
 import { FILTERS } from './selectors';
 
 const initialState = {
-    todos: [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            title: 'Hey!',
-            completed: false,
-        },
-        {
-            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-            title: 'Ho!',
-            completed: true,
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: `Let's Go`,
-            completed: false,
-        },
-    ],
+    todos: [],
     filter: FILTERS.ALL,
 };
 
 export const todosReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SET_TODOS:
+            return {
+                todos: action.todos.map(todo => todo),
+            };
         case ADD_TODO:
             return {
                 ...state,
                 todos: state.todos.concat({
-                    id: uuidv4(),
-                    title: action.title,
-                    completed: false,
+                    id: action.todo.id.toString(),
+                    title: action.todo.title,
+                    completed: action.todo.completed,
                 }),
             };
         case TOGGLE_TODO:
