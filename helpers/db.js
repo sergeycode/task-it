@@ -42,6 +42,25 @@ export const insertTodo = (title, completed) => {
     return promise;
 };
 
+export const deleteTodo = id => {
+    const promise = new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                `DELETE FROM todos
+                        WHERE id = ?`,
+                [id],
+                (_, result) => {
+                    resolve(result);
+                },
+                (_, err) => {
+                    reject(err);
+                }
+            );
+        });
+    });
+    return promise;
+};
+
 export const fetchTodos = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
