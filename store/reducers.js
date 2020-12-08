@@ -1,4 +1,3 @@
-import 'react-native-get-random-values';
 import {
     ADD_TODO,
     SET_TODOS,
