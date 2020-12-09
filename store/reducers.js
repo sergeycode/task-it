@@ -10,6 +10,7 @@ import { FILTERS } from './selectors';
 const initialState = {
     todos: [],
     filter: FILTERS.ALL,
+    loading: true,
 };
 
 export const todosReducer = (state = initialState, action) => {
@@ -17,6 +18,7 @@ export const todosReducer = (state = initialState, action) => {
         case SET_TODOS:
             return {
                 todos: action.todos.map(todo => todo),
+                loading: action.loading,
             };
         case ADD_TODO:
             return {

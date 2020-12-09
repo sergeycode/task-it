@@ -29,7 +29,11 @@ export const loadTodos = () => {
     return async dispatch => {
         try {
             const dbResult = await fetchTodos();
-            dispatch({ type: SET_TODOS, todos: dbResult.rows._array });
+            dispatch({
+                type: SET_TODOS,
+                todos: dbResult.rows._array,
+                loading: false,
+            });
         } catch (err) {
             throw err;
         }

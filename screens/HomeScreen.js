@@ -6,6 +6,7 @@ import { filterVisible } from '../store/selectors';
 
 import TodoItem from '../components/TodoItem';
 import RemoveTodo from '../components/RemoveTodo';
+import Spinner from '../components/Spinner';
 import Colors from '../constants/Colors';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
@@ -20,6 +21,8 @@ export default function HomeScreen() {
     const visibleTodos = useSelector(state =>
         filterVisible(state.todos.todos, state.filter.filter)
     );
+
+    const loading = useSelector(state => state.todos.loading);
 
     const handleCompleted = (id, completed) =>
         dispatch(toggleTodo(id, !completed));
@@ -60,21 +63,29 @@ export default function HomeScreen() {
         );
     };
 
-    return (
-        <View style={styles.mainContainer}>
-            {visibleTodos.length === 0 ? (
-                <Text style={styles.text}>
-                    There are no tasks in this category
-                </Text>
-            ) : (
-                <FlatList
-                    data={visibleTodos}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={renderTodoItem}
-                />
-            )}
-        </View>
-    );
+    if (loading) {
+        return (
+            <View style={styles.mainContainer}>
+                <Spinner />
+            </View>
+        );
+    } else {
+        return (
+            <View style={styles.mainContainer}>
+                {visibleTodos.length === 0 ? (
+                    <Text style={styles.text}>
+                        There are no tasks in this category
+                    </Text>
+                ) : (
+                    <FlatList
+                        data={visibleTodos}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={renderTodoItem}
+                    />
+                )}
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
