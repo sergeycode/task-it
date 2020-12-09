@@ -22,6 +22,18 @@ export default function HomeScreen() {
         filterVisible(state.todos.todos, state.filter.filter)
     );
 
+    const currentFiler = useSelector(state => state.filter.filter);
+    const filterMessage = () => {
+        switch (currentFiler) {
+            case 'ACTIVE':
+                return 'There are no active tasks.';
+            case 'COMPLETED':
+                return 'There are no completed tasks.';
+            default:
+                return 'There are no tasks. Please add new task.';
+        }
+    };
+
     const loading = useSelector(state => state.todos.loading);
 
     const handleCompleted = (id, completed) =>
@@ -73,9 +85,7 @@ export default function HomeScreen() {
         return (
             <View style={styles.mainContainer}>
                 {visibleTodos.length === 0 ? (
-                    <Text style={styles.text}>
-                        There are no tasks in this category
-                    </Text>
+                    <Text style={styles.text}>{filterMessage()}</Text>
                 ) : (
                     <FlatList
                         data={visibleTodos}
