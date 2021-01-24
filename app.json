@@ -2,6 +2,7 @@
   "expo": {
     "name": "task-it",
     "slug": "task-it",
+    "description": "Todo app made with React Native and Redux. Add tasks, complete tasks, remove tasks, filter tasks. Swipe to remove. Stored in SQLite database. Stack navigation and tabs.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
