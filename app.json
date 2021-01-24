@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "todo-e",
-    "slug": "todo-e",
+    "name": "task-it",
+    "slug": "task-it",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
